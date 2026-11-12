@@ -1,10 +1,12 @@
 package com.pluralsight;
 
+import java.util.ArrayList;
+
 public class Player {
 
     private String name;
     private Hand hand;
-
+    private ArrayList<Card> cards;
 
     public Player(String name, Hand hand) {
         this.name = name;
@@ -27,5 +29,7 @@ public class Player {
         this.hand = hand;
         return hand;
     }
+
+
 
 }

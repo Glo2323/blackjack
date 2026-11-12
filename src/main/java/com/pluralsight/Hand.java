@@ -14,6 +14,10 @@ public class Hand {
         cards.add(card);
     }
 
+    public void unDeal() {
+        cards.clear();
+    }
+
     public int getSize() {
         return cards.size();
     }
@@ -24,6 +28,26 @@ public class Hand {
         for (Card card : cards) {
             card.flip(); // turn the card over to see the value
             value += card.getPointValue();
+            card.flip(); // hide the card again
+        }
+        return value;
+    }
+
+    public String getCardDescription() {
+        String value = "";
+        for (Card card : cards) {
+            card.flip(); // turn the card over to see the value
+            value = card.getValue();
+            card.flip(); // hide the card again
+        }
+        return value;
+    }
+
+    public String getCardSuitDescription() {
+        String value = "";
+        for (Card card : cards) {
+            card.flip(); // turn the card over to see the value
+            value = card.getSuit();
             card.flip(); // hide the card again
         }
         return value;
