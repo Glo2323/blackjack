@@ -13,7 +13,7 @@ public class Hand {
     public void deal(Card card) {
         cards.add(card);
     }
-
+    //The Hand clears the Cards that were dealt
     public void unDeal() {
         cards.clear();
     }
@@ -32,7 +32,7 @@ public class Hand {
         }
         return value;
     }
-
+    //Get the card value
     public String getCardDescription() {
         String value = "";
         for (Card card : cards) {
@@ -42,7 +42,7 @@ public class Hand {
         }
         return value;
     }
-
+    //Get the card suit
     public String getCardSuitDescription() {
         String value = "";
         for (Card card : cards) {
