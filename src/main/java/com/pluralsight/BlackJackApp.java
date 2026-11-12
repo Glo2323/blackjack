@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 public class BlackJackApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         //?Starting the game
+        System.out.println("\nWelcome to Messi's BlackJack Table\n");
+        Thread.sleep(500);
        playBlackJack();
 
     }
-    public static void playBlackJack() {
+    public static void playBlackJack() throws InterruptedException {
         //?Creating my scanner
         Scanner input = new Scanner(System.in);
 
@@ -39,22 +41,49 @@ public class BlackJackApp {
         boolean menuApp = true;
         while (menuApp) {
 
+            Thread.sleep(500);
+            System.out.println("Dealing cards");
+            Thread.sleep(500);
+
             //*Dealing carding out to the players
             dealCards(player1.getHand());
             dealCards(player2.getHand());
 
-            //*getting the value of the players cards
-            int player1Score = player1.getHand().getValue();
-            int player2Score = player2.getHand().getValue();
-            //*finding out whether the players busted
-            boolean Bust = player1Score > 21;
-            boolean Bust2 = player2Score > 21;
             //*getting the players card's info
             String player1Cards = player1.getHand().getCardDescription() + " of " + player1.getHand().getCardSuitDescription();
             String player2Cards = player2.getHand().getCardDescription() + " of " + player2.getHand().getCardSuitDescription();
 
+            //*Displaying the users scores
+            System.out.println(player1.getName() + "'s card value " + player1.getHand().getValue());
+
+            System.out.println(player2.getName() + "'s card value  " + player2.getHand().getValue());
+
+            //*Asking users if they want to hit
+            System.out.println(player1.getName());
+            hitOrStand(player1.getHand());
+            if (player1.getHand().getValue() > 21) {
+                System.out.println(player1.getName() + " Bust ");
+            }
+
+            //*Asking users if they want to hit
+            System.out.println(player2.getName());
+            hitOrStand(player2.getHand());
+            if (player2.getHand().getValue() > 21) {
+                System.out.println(player2.getName() + " Bust ");
+            }
+
+            //*getting the value of the players cards
+            int player1Score = player1.getHand().getValue();
+            int player2Score = player2.getHand().getValue();
+
+            //*finding out whether the players busted
+            boolean Bust = player1Score > 21;
+            boolean Bust2 = player2Score > 21;
+
             //?Finding out who won by seeing who has the highest value without busting
-            if (player1Score > player2Score && !Bust) {
+            if (Bust && Bust2) {
+                System.out.println("Both players Bust House Wins!!! ");
+            }else if (player1Score > player2Score && !Bust) {
                 System.out.println(player1.getName() + "'s cards " + player1Cards + " " + player1Score + "\n"
                         + player2.getName() + "'s cards " + player2Cards + " " + player2Score);
                 System.out.println("Winner is " + player1.getName());
@@ -114,6 +143,33 @@ public class BlackJackApp {
             //clearing the cards from the hand
             hand.unDeal();
         }
+    }
+
+    //!Creating a method to ask users
+    public static void hitOrStand(Hand hand) {
+        //?creating my scanner
+        Scanner input = new Scanner(System.in);
+        //create the deck
+        Deck deck = new Deck();
+        //Shuffling the deck
+        deck.shuffle();
+
+        //*Asking if users wants to hit or stand
+        System.out.println("Hit or Stand");
+        String userInput = input.nextLine();
+        if (userInput.equalsIgnoreCase("Hit")) {
+        for (int i = 0; i < 1; i++) {
+            // get a card from the deck
+            Card card = deck.deal();
+            // deal that card to the hand
+            hand.deal(card);
+        }
+
+    }
+
+
+
+
     }
 
 }
