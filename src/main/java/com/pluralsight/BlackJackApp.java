@@ -6,12 +6,14 @@ import java.util.Scanner;
 public class BlackJackApp {
 
     public static void main(String[] args) throws InterruptedException {
-        //?Starting the game
+        //?Title screen
         System.out.println("\nWelcome to Messi's BlackJack Table\n");
         Thread.sleep(500);
-       playBlackJack();
+        //?Starting the game
+        playBlackJack();
 
     }
+    //!Creating a method to run/play the game
     public static void playBlackJack() throws InterruptedException {
         //?Creating my scanner
         Scanner input = new Scanner(System.in);
@@ -22,8 +24,10 @@ public class BlackJackApp {
 
         //*Creating a group for the players
         Player[] players = new Player[1];
+//        ArrayList<Player> playersList = new ArrayList<>();
 
         //*Creating the players
+//        players(playersList);
         Player player1 = new Player("name", hand1);
         Player player2 = new Player("name", hand2);
 
@@ -83,6 +87,8 @@ public class BlackJackApp {
             //?Finding out who won by seeing who has the highest value without busting
             if (Bust && Bust2) {
                 System.out.println("Both players Bust House Wins!!! ");
+                System.out.println(player1.getName() + "'s cards " + player1Cards + " " + player1Score + "\n"
+                        + player2.getName() + "'s cards " + player2Cards + " " + player2Score);
             }else if (player1Score > player2Score && !Bust) {
                 System.out.println(player1.getName() + "'s cards " + player1Cards + " " + player1Score + "\n"
                         + player2.getName() + "'s cards " + player2Cards + " " + player2Score);
@@ -136,6 +142,7 @@ public class BlackJackApp {
             hand.deal(card);
         }
     }
+
     //!Creating a method to clear the players hand
     public static void unDealCards(Hand hand) {
         // deal 5 cards from the deck and add them to the hand
@@ -145,27 +152,53 @@ public class BlackJackApp {
         }
     }
 
+    //!Creating a method that creates the players
+    public static void players(ArrayList<Player>players){
+        //?Creating a Scanner
+        Scanner input = new Scanner(System.in);
+        Hand hand = new Hand();
+
+        //*Asking users how many players are playing
+        System.out.println("How many players?");
+        int playersCount = input.nextInt();
+        for (int i = 0; i < playersCount; i++) {
+            System.out.println("What's your name");
+            String playerName = input.next();
+            players.add(new Player(playerName,hand));
+
+        }
+
+    }
+
     //!Creating a method to ask users
     public static void hitOrStand(Hand hand) {
         //?creating my scanner
         Scanner input = new Scanner(System.in);
+
         //create the deck
         Deck deck = new Deck();
         //Shuffling the deck
         deck.shuffle();
 
+        boolean menuApp = true;
+        while (menuApp){
+
         //*Asking if users wants to hit or stand
         System.out.println("Hit or Stand");
         String userInput = input.nextLine();
         if (userInput.equalsIgnoreCase("Hit")) {
-        for (int i = 0; i < 1; i++) {
-            // get a card from the deck
-            Card card = deck.deal();
-            // deal that card to the hand
-            hand.deal(card);
-        }
+            for (int i = 0; i < 1; i++) {
+                // get a card from the deck
+                Card card = deck.deal();
+                // deal that card to the hand
+                hand.deal(card);
 
-    }
+            }
+            System.out.println( "Card value " + hand.getValue());
+        } else if (userInput.equalsIgnoreCase("Stand")) {
+            menuApp = false;
+        }
+        }
 
 
 
