@@ -7,6 +7,10 @@ public class BlackJackApp {
 
     public static void main(String[] args) {
 
+       playBlackJack();
+
+    }
+    public static void playBlackJack() {
         Scanner input = new Scanner(System.in);
 
         Hand hand1 = new Hand();
@@ -16,14 +20,14 @@ public class BlackJackApp {
 
         Player player1 = new Player("name", hand1);
         Player player2 = new Player("name", hand2);
-//
-//        System.out.println("Enter Player 1's name");
-//        player1.setName(input.next());
-//
-//        System.out.println("Enter Player 2's name");
-//        player2.setName(input.next());
-//
-//        input.nextLine();
+
+        System.out.println("Enter Player 1's name");
+        player1.setName(input.next());
+
+        System.out.println("Enter Player 2's name");
+        player2.setName(input.next());
+
+        input.nextLine();
 
         boolean menuApp = true;
         while (menuApp) {
@@ -77,7 +81,6 @@ public class BlackJackApp {
                 menuApp = false;
             }
         }
-
     }
 
     public static void dealCards(Hand hand) {
